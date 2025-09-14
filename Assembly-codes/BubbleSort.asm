@@ -1,8 +1,8 @@
 # BubbleSort using dynamic string allocation 
 		.data
 		.align 2 
-vector_int:	.word 10,9,8,7,4,2,45,65,1,13,13,5
-size: 		.word 12 
+vector_int:	.word 80,23,34,44,56,23,22,21,101,10
+size: 		.word 10
 		.align 0 
 msg_before_order:	.asciz "\n Vector before ordering: \n" 
 msg_after_order: 	.asciz "\n Vector after ordering: \n"
