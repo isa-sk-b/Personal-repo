@@ -1,7 +1,7 @@
 # BubbleSort using dynamic string allocation 
 		.data
 		.align 2 
-vector_int:	.word 7, 5, 2, 1, 1, 3, 4
+vector_int:	.word 7,5,2,1,1,3,4
 size: 		.word 7 
 		.align 0 
 msg_before_order:	.asciz "\n Vector before ordering: \n" 
@@ -14,17 +14,21 @@ main:
 		# t3 saves the size of the vector 
 		lw t3,size
 		
-		# initialize counter variable 
-		add t1,zero,zero
+		# Initialize counter variable 
+		add t1,zero,zero 
 		
-		# t0 receives the address of the vector ints  
-		la t0,vector_int #  set t1 to label's address 
-		
-		# print message and vector 
+		# Print message and vector 
 		addi a7,zero,4 
 		la a0,msg_before_order 
 		ecall # prints message 
+		
+		# Set address of label to t0 
+		la t0,vector_int
 		jal print_vector # prints vector	
+		
+		# Exit program 
+		addi a7,zero,10 
+		ecall
 
 print_vector: 	
 		lw t2,0(t0) 	# prints word from 0 bytes offset of the address stored in register t0 
@@ -34,5 +38,5 @@ print_vector:
 		add a0,zero,t2
 		addi a7,zero,1 
 		ecall 
-		blt t1,t3,print_vector
-		j print_vector
+		bne t1,t3,print_vector
+		jr ra
