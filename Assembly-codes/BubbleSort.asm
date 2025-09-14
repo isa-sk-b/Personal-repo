@@ -26,6 +26,7 @@ main:
 		jal print_vector 		# prints vector	
 		
 		# Executes bubble sort 
+		add s1,zero,zero 	# Saves the limiter of the bubbleSort_ext loop 
 		addi t5,s0,-1 		# Saves the last index of the vector in other register 
 		addi t6,t5,-1		# Counter to last index visited by bubbleSort_int
 		j bubbleSort_ext
@@ -62,8 +63,8 @@ bubbleSort_int:	# Purpose: pass through the vector and switch places
 return_bubble:	
 		addi t0,t0,4 		# Updates the address 
 		addi t1,t1,1 		# Updates counter to pass through the vector 
-		beq t6,t1,bubbleSort_ext_ret # If t1 reached the index before the first index of the sorted area, then it passed once through the vector (Exit this loop)
-		j bubbleSort_int 	
+		beq t6,t1,bubbleSort_ext_ret 
+		j bubbleSort_int 		# If t1 didn't reached t6 (the index before the first index of the sorted area), then repeat (didn't finish roaming the vector)
 
 
 switch_bubble: 
