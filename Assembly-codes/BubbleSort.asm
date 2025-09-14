@@ -60,8 +60,8 @@ bubbleSort_int:	# Purpose: pass through the vector and switch places
 		lw t3,4(t0) 		# 4 bytes offset to address in t0 
 		# Store values in register so they can be compared 
 		bgt t2,t3,switch_bubble 	# If t2 > t3, the vector is in descending order 
-		j return_bubble
-return_bubble:	
+		j bubbleSort_int_ret
+bubbleSort_int_ret:	
 		addi t0,t0,4 		# Updates the address 
 		addi t1,t1,1 		# Updates counter to pass through the vector  
 		j bubbleSort_int 		# If t1 didn't reached t6 (the index before the first index of the sorted area), then repeat (didn't finish roaming the vector)
@@ -70,7 +70,7 @@ return_bubble:
 switch_bubble: 
 		sw t2,4(t0)		# t2 stored in the memory address of the next in the vector 
 		sw t3,0(t0)		# t3 stored in the memory address of the current in the vector
-		j return_bubble    
+		j bubbleSort_int_ret   
 
 
 print_vector: 	
