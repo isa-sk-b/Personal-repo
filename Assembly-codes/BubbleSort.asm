@@ -27,7 +27,7 @@ main:
 		
 		# Executes bubble sort 
 		add s1,zero,zero 	# Saves the limiter of the bubbleSort_ext loop 
-		addi t5,s0,-1 		# Saves the last index of the vector in other register 
+		add t5,s0,zero		# Saves the last index of the vector in other register 
 		addi t6,t5,-1		# Counter to last index visited by bubbleSort_int
 		j bubbleSort_ext
 return_main: 		
@@ -55,6 +55,7 @@ bubbleSort_ext_ret:
 
 
 bubbleSort_int:	# Purpose: pass through the vector and switch places 
+		beq t6,t1,bubbleSort_ext_ret
 		lw t2,0(t0) 		# 0 bytes offset to address in t0 
 		lw t3,4(t0) 		# 4 bytes offset to address in t0 
 		# Store values in register so they can be compared 
@@ -62,8 +63,7 @@ bubbleSort_int:	# Purpose: pass through the vector and switch places
 		j return_bubble
 return_bubble:	
 		addi t0,t0,4 		# Updates the address 
-		addi t1,t1,1 		# Updates counter to pass through the vector 
-		beq t6,t1,bubbleSort_ext_ret 
+		addi t1,t1,1 		# Updates counter to pass through the vector  
 		j bubbleSort_int 		# If t1 didn't reached t6 (the index before the first index of the sorted area), then repeat (didn't finish roaming the vector)
 
 
