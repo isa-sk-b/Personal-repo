@@ -26,11 +26,8 @@ main:
 		jal print_vector 		# prints vector	
 		
 		# Executes bubble sort 
-		addi s1,s1,0 		#  in register to count the sorted region 
-		la t0,vector_int 		# Fetches the address of the label (address of the first byte) to t0 
 		addi t5,s0,-1 		# Saves the last index of the vector in other register 
 		addi t6,t5,-1		# Counter to last index visited by bubbleSort_int
-		add t1,zero,zero 		# Initialize t1 counter to roam through the vector 
 		j bubbleSort_ext
 return_main: 		
 		# Print messsage and vector after sorting 
@@ -45,6 +42,17 @@ return_main:
 		ecall
 
 
+bubbleSort_ext:	# Purpose: Counts the area of vector that is already sorted 
+		la t0,vector_int 		# Fetches the address of the label (address of the first byte) to t0 
+		add t1,zero,zero 		# Initialize t1 counter to roam through the vector 
+		j bubbleSort_int 
+bubbleSort_ext_ret: 
+		addi t6,t6,-1		# The counter to bubbleSort_int is updated 
+		addi t5,t5,-1  		# The counter is decreased until it reaches value in s1 
+		beq t5,s1,return_main
+		j bubbleSort_ext		# If t5 didn't reach s1 (passed through the vector all the times necessary), then repeat
+
+
 bubbleSort_int:	# Purpose: pass through the vector and switch places 
 		lw t2,0(t0) 		# 0 bytes offset to address in t0 
 		lw t3,4(t0) 		# 4 bytes offset to address in t0 
@@ -54,17 +62,9 @@ bubbleSort_int:	# Purpose: pass through the vector and switch places
 return_bubble:	
 		addi t0,t0,4 		# Updates the address 
 		addi t1,t1,1 		# Updates counter to pass through the vector 
-		beq t6,t1,bubbleSort_ext_ret # If t1 reached the index of the 
+		beq t6,t1,bubbleSort_ext_ret # If t1 reached the index before the first index of the sorted area, then it passed once through the vector (Exit this loop)
 		j bubbleSort_int 	
 
-
-bubbleSort_ext:	# Purpose: Counts the area of vector that is already sorted 
-		j bubbleSort_int 
-bubbleSort_ext_ret: 
-		addi t6,t6,-1		# The counter to bubbleSort_int is updated 
-		addi t5,t5,-1  		# The counter is decreased until it reaches value in s1 
-		beq t5,s1,return_main
-		j bubbleSort_ext		# If t5 didn't reach s1 (passed through the vector all the times necessary), than repeat
 
 switch_bubble: 
 		sw t2,4(t0)		# t2 stored in the memory address of the next in the vector 
