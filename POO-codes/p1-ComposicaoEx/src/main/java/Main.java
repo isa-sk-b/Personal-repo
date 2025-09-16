@@ -9,7 +9,7 @@
  */
 public class Main {
     public static void main(String[] args) {
-        NumeroComplexo[] n = new NumeroComplexo[2]; // aloca strings de numero complexo na memoria 
+        NumeroComplexo[] n = new NumeroComplexo[2]; // Aloca strings de numero complexo na memoria 
          n[0] = new NumeroComplexo(5,3); 
          n[1] = new NumeroComplexo(10,2);
         
