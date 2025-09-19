@@ -124,7 +124,7 @@ ListarInventario_3:
 		ecall
 
 loop_opc3:	
-		beq t0, zero, fim_loop_opc3	#se t0=0 o loop termina
+		beq t0, zero, fim_loop_opc3	#se t0==0 o loop termina
 		#Carregar o ID em a0 e printar 
 		lw a0, 0(t0)			
 		addi a7, zero, 1
