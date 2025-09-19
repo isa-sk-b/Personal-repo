@@ -2,7 +2,7 @@
 #Grupo:
 	#Caio Cesar Trentin de Assis 	- 15674233
 	#Isabela Sakomura Borges 		- 15460673
-	#João Pedro Lopes de Melo 	- 15588950
+	#Joao Pedro Lopes de Melo 		- 15588950
 	#Mariana do Nascimento Ferreira 	- 15582241
 
 #Mochila do Aventureiro
@@ -58,7 +58,7 @@ main_loop:
 		#Voltar pro comeco do loop:
 		j main_loop
 
-#Opção 1: Adicionar Item
+#Opcao 1: Adicionar Item
 AdicionarItem_1:
 		#Printar mensagem de ID:
 		addi a7,zero,4
